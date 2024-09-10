@@ -1,0 +1,16 @@
+node_modules/
+
+# dist or lib
+../dist/
+/dist
+**/dist*
+# All .env files
+
+**/.env*
+
+
+# jest --coverage
+coverage/
+
+**/error.log
+**/request.lonode_modules
