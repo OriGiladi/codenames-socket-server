@@ -1,8 +1,8 @@
-import { Socket } from "socket.io";
+import { Server as SocketIOServer } from 'socket.io';
 import { user } from "../utils/types";
 import { getChosenParts, getUsersByChatRoomID } from "../apiService";
 
-export const handleChoosingPart = async (socketIO: Socket, chatRoomID: number) => {
+export const handleChoosingPart = async (socketIO: SocketIOServer, chatRoomID: number) => {
     const users = (await getUsersByChatRoomID(chatRoomID)) as user  []
     
     socketIO.emit('updatingUsersResponse', users);
