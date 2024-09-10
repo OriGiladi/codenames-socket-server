@@ -32,6 +32,7 @@ export type GameProperties = {
     firstTeamUnguessedWords?: string[];
     secondTeamWords?: string[];
     civilianWords?: string[];
+    civilianUnguessedWords?: string[];
     assassinWord?: string [];
     turn?: team;
     firstTeam?: team;
