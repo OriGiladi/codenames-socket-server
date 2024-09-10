@@ -7,7 +7,7 @@ node_modules/
 # All .env files
 
 **/.env*
-package.lock
+package-lock
 
 # jest --coverage
 coverage/

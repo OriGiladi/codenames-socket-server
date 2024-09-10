@@ -1,11 +1,11 @@
-import { Socket } from "socket.io";
+import { Server as SocketIOServer } from 'socket.io';
 import { GameProperties } from "../utils/types";
 import { REST_API_BASE_URL } from "../utils/constants";
 import { getHeaders } from "../utils/sdk";
 import axios from "axios";
 import { setGameProperties } from "../setGamePropties";
 
-export const handleStartingGame = async (socketIO: Socket, gameStartProperties: GameProperties) => {  
+export const handleStartingGame = async (socketIO: SocketIOServer, gameStartProperties: GameProperties) => {  
     const gamesCreatedJson = await fetch(`${REST_API_BASE_URL}/gameProperties/${gameStartProperties.chatRoomID}`);
     const gamesCreated = await gamesCreatedJson.json() as GameProperties [];
     if (gamesCreated.length === 0){

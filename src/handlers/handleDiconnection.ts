@@ -1,13 +1,11 @@
-
-
-import { Socket } from "socket.io";
+import { Server as SocketIOServer } from 'socket.io';
 import { SessionSocket, user } from "../utils/types";
 import { checkIfAllUsersAreOffline, getUserByUserName, getUsersByChatRoomID } from "../apiService";
 import { REST_API_BASE_URL } from "../utils/constants";
 import { getHeaders } from "../utils/sdk";
 import axios from "axios";
 
-export const handleDisconnection = async (socket: SessionSocket, socketIO: Socket) => {
+export const handleDisconnection = async (socket: SessionSocket, socketIO: SocketIOServer) => {
     console.log('🔥: A user disconnected');
     try {
         const disconnectedUser = (await getUserByUserName(socket.userName as string))

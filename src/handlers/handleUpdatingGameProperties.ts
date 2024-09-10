@@ -1,9 +1,9 @@
-import { Socket } from "socket.io";
+import { Server as SocketIOServer } from 'socket.io';
 import { getUserByUserName } from "../apiService";
 import { setGameProperties } from "../setGamePropties";
 import { GameProperties } from "../utils/types";
 
-export const handleUpdatingGameProperties = async (socketIO:Socket, gameProperties: GameProperties | 'none', userName?: string) => {
+export const handleUpdatingGameProperties = async (socketIO:SocketIOServer, gameProperties: GameProperties | 'none', userName?: string) => {
     if(gameProperties !== 'none'){
         const updatedGameProperties = await setGameProperties(gameProperties)
         socketIO.emit('updateGamePropertiesResponse', updatedGameProperties);
