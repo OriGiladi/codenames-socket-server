@@ -14,7 +14,7 @@ export const handleStartingGame = async (socketIO: SocketIOServer, gameStartProp
                 headers: getHeaders()
             });
             const gameProperties = await setGameProperties(gameStartProperties)
-            socketIO.emit('updateGamePropertiesResponse', gameProperties);
+            socketIO.in((gameStartProperties.chatRoomID as number).toString()).emit('updateGamePropertiesResponse', gameProperties);
         } catch (error) {
             console.error(error);
             return { response: false, data: null };

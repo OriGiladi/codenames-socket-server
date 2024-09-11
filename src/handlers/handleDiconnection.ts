@@ -27,7 +27,7 @@ export const handleDisconnection = async (socket: SessionSocket, socketIO: Socke
                 headers: getHeaders()
             });
         }
-        socketIO.emit('updatingUsersResponse', usersInRoom);
+        socketIO.in(currentChatRoomID.toString()).emit('updatingUsersResponse', usersInRoom);
     } catch (error) {
         console.error(error);
     }  
