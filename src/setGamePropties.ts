@@ -3,10 +3,10 @@ import { REST_API_BASE_URL } from "./utils/constants";
 import { GameProperties, GamePropertiesKey } from "./utils/types";
 
 export const setGameProperties = async (updatedProperties: GameProperties) => {
-    const gamePropertiesJson = await fetch(`${REST_API_BASE_URL}/gameProperties/${updatedProperties.chatRoomID}`);
+    const gamePropertiesJson = await fetch(`${REST_API_BASE_URL}/gameProperties/${updatedProperties.chatRoom}`);
     const gameProperties = await gamePropertiesJson.json() as GameProperties [];
     if(gameProperties.length === 0){
-        console.error('no game properties has been found for chatRoomID:',updatedProperties.chatRoomID)
+        console.error('no game properties has been found for chatRoom:',updatedProperties.chatRoom)
     }
     const updatedGameProperties: GameProperties = { ...gameProperties[0] };
     for (const [key, value] of Object.entries(updatedProperties)) {

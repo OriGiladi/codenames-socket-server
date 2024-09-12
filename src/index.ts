@@ -39,11 +39,11 @@ socketIO.on('connection', (socket: SessionSocket) => {
     socket.on('disconnect', () => {
         handleDisconnection(socket, socketIO)
     });
-    socket.on('getChosenParts', (chatRoomID: number) => {
-        handleChoosingPart( socketIO, chatRoomID)
+    socket.on('getChosenParts', (chatRoom: string) => {
+        handleChoosingPart( socketIO, chatRoom)
     });
-    socket.on('newUser', (user: user, chatRoomID: number | undefined) => {
-        handleNewUser( socketIO ,socket, user, chatRoomID)
+    socket.on('newUser', (user: user, chatRoom: string | undefined) => {
+        handleNewUser( socketIO ,socket, user, chatRoom)
     });
     socket.on('gameStart',(gameStartProperties: GameProperties) => {
         handleStartingGame(socketIO, gameStartProperties)}
@@ -51,8 +51,8 @@ socketIO.on('connection', (socket: SessionSocket) => {
     socket.on('updateGameProperties',(gameProperties: GameProperties | 'none', userName?: string) => {
         handleUpdatingGameProperties(socketIO, gameProperties, userName)
     });
-    socket.on("join_room", (chatRoomID: string) => {
-        socket.join(chatRoomID.toString());
+    socket.on("join_room", (chatRoom: string) => {
+        socket.join(chatRoom.toString());
     });
 });
 

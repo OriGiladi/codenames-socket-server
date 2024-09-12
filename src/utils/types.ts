@@ -3,7 +3,7 @@ import { Socket } from "socket.io";
 export type user = { 
     id: string;
     userName: string;
-    chatRoomID: number;
+    chatRoom: string;
     role: role;
     team: team;
     isOnline: boolean;
@@ -26,7 +26,7 @@ export type cardData = {
     clicked: boolean;
 }
 export type GameProperties = {
-    chatRoomID?: number;
+    chatRoom?: string;
     gameArray?: cardData[][];
     firstTeamWords?: string[];
     firstTeamUnguessedWords?: string[];
