@@ -10,24 +10,27 @@ export const handleDisconnection = async (socket: SessionSocket, socketIO: Socke
     try {
         const disconnectedUser = (await getUserByUserName(socket.userName as string))
         const currentChatRoom = disconnectedUser.chatRoom 
-        const onlineUserProperties = {
-            isOnline: false,
-            userName: socket.userName as string
-        }
-        await axios.patch(`${REST_API_BASE_URL}/user`, onlineUserProperties, {
-            headers: getHeaders()
-        });
-        const usersInRoom = (await getUsersByChatRoom(currentChatRoom)) as user []
-        if(checkIfAllUsersAreOffline(usersInRoom))
-        {
-            await axios.delete(`${REST_API_BASE_URL}/gameProperties/${currentChatRoom}`, {
+        
+        if(currentChatRoom){
+            const onlineUserProperties = {
+                isOnline: false,
+                userName: socket.userName as string
+            }
+            await axios.patch(`${REST_API_BASE_URL}/user/online`, onlineUserProperties, {
                 headers: getHeaders()
             });
-            await axios.delete(`${REST_API_BASE_URL}/user/room/${currentChatRoom}`, {
-                headers: getHeaders()
-            });
+            const usersInRoom = (await getUsersByChatRoom(currentChatRoom)) as user []
+            if(checkIfAllUsersAreOffline(usersInRoom))
+            {
+                await axios.delete(`${REST_API_BASE_URL}/gameProperties/${currentChatRoom}`, {
+                    headers: getHeaders()
+                });
+                await axios.delete(`${REST_API_BASE_URL}/user/room/${currentChatRoom}`, {
+                    headers: getHeaders()
+                });
+            }
+            socketIO.in(currentChatRoom).emit('updatingUsersResponse', usersInRoom);
         }
-        socketIO.in(currentChatRoom.toString()).emit('updatingUsersResponse', usersInRoom);
     } catch (error) {
         console.error(error);
     }  
