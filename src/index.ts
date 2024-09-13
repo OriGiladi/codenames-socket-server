@@ -52,7 +52,7 @@ socketIO.on('connection', (socket: SessionSocket) => {
         handleUpdatingGameProperties(socketIO, gameProperties, userName)
     });
     socket.on("join_room", (chatRoom: string) => {
-        socket.join(chatRoom.toString());
+        socket.join(chatRoom);
     });
 });
 
