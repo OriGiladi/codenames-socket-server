@@ -20,7 +20,7 @@ export const handleDisconnection = async (socket: SessionSocket, socketIO: Socke
                 headers: getHeaders()
             });
             const usersInRoom = (await getUsersByChatRoom(currentChatRoom)) as user []
-            if(checkIfAllUsersAreOffline(usersInRoom))
+            if(checkIfAllUsersAreOffline(usersInRoom) && usersInRoom.length !== 1)
             {
                 await axios.delete(`${REST_API_BASE_URL}/gameProperties/${currentChatRoom}`, {
                     headers: getHeaders()
