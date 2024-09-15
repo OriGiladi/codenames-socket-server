@@ -3,7 +3,6 @@ import { GameProperties } from "../utils/types";
 import { REST_API_BASE_URL } from "../utils/constants";
 import { getHeaders } from "../utils/sdk";
 import axios from "axios";
-import { setGameProperties } from "../setGamePropties";
 
 export const handleStartingGame = async (socketIO: SocketIOServer, gameStartProperties: GameProperties) => {  
     const gamesCreatedJson = await fetch(`${REST_API_BASE_URL}/gameProperties/${gameStartProperties.chatRoom}`);
@@ -13,8 +12,7 @@ export const handleStartingGame = async (socketIO: SocketIOServer, gameStartProp
             await axios.post(`${REST_API_BASE_URL}/gameProperties`, gameStartProperties, {
                 headers: getHeaders()
             });
-            const gameProperties = await setGameProperties(gameStartProperties)
-            socketIO.in((gameStartProperties.chatRoom as string).toString()).emit('updateGamePropertiesResponse', gameProperties);
+            socketIO.in((gameStartProperties.chatRoom as string)).emit('updateGamePropertiesResponse', gameStartProperties);
         } catch (error) {
             console.error(error);
             return { response: false, data: null };

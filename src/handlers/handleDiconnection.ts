@@ -19,6 +19,7 @@ export const handleDisconnection = async (socket: SessionSocket, socketIO: Socke
             await axios.patch(`${REST_API_BASE_URL}/user/online`, onlineUserProperties, {
                 headers: getHeaders()
             });
+    
             const usersInRoom = (await getUsersByChatRoom(currentChatRoom)) as user []
             if(checkIfAllUsersAreOffline(usersInRoom) && usersInRoom.length !== 1)
             {
