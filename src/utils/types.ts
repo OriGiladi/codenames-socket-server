@@ -46,6 +46,7 @@ export type GameProperties = {
     secondTeamClues?: clueObj [];
     secondTeamUnguessedWords?: string[];
     winner?: 'red' | 'blue' | null;
+    createdAt?: Date
 };
 
 export type message = {
